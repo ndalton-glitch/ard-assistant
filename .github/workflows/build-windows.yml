@@ -2,7 +2,7 @@ name: Build Windows installer
 
 on:
   push:
-    tags: ['v*']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -26,9 +26,9 @@ jobs:
           name: ARD-Assistant-Setup
           path: dist/*.exe
       - name: Attach installer to the GitHub release
-        if: startsWith(github.ref, 'refs/tags/')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" dist/*.exe --title "ARD Assistant $GITHUB_REF_NAME" --notes "Download the .exe below and double-click it to install." || gh release upload "$GITHUB_REF_NAME" dist/*.exe --clobber
+          TAG="v$(node -p "require('./package.json').version")"
+          gh release create "$TAG" dist/*.exe --target "$GITHUB_SHA" --title "ARD Assistant $TAG" --notes "Download the .exe below and double-click it to install." || gh release upload "$TAG" dist/*.exe --clobber

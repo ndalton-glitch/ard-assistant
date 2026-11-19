@@ -7,4 +7,4 @@ Windows desktop app that drafts Texas ARD meeting summaries from IEPs, FIEs, MAP
 Student files stay on your computer (Documents\ARD Assistant by default). Only the documents for a summary you ask it to read or draft are sent to the Anthropic API.
 
 ## Building
-Pushing a tag like `v1.0.1` runs `.github/workflows/build-windows.yml`, which builds the installer on Windows and attaches it to a GitHub release.
+Each push to `main` runs `.github/workflows/build-windows.yml`, which builds the installer on Windows and attaches it to a GitHub release named after the version in package.json (bump the version for a new release).
