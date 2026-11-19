@@ -1,0 +1,46 @@
+{
+  "name": "ard-assistant",
+  "productName": "ARD Assistant",
+  "version": "1.0.0",
+  "description": "Drafts ARD summaries from IEPs, FIEs, MAP, STAAR and progress reports",
+  "main": "src/main/main.js",
+  "author": "ARD Assistant",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "local.ardassistant.app",
+    "productName": "ARD Assistant",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "perMachine": false
+    }
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.10.0",
+    "docx": "^9.15.4",
+    "mammoth": "^1.13.0",
+    "marked": "^18.2.1",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0"
+  }
+}
